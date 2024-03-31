@@ -4,6 +4,7 @@ import { AppBar, Toolbar, TextField, Button, Paper, Typography, Container, Alert
 import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import { Link, useNavigate } from 'react-router-dom';
 import { createAccount, verifyToken } from '../../utils/authentication';
+import { Password } from '@mui/icons-material';
 
 const styles = {
     bodyStyle : {
@@ -91,29 +92,88 @@ const Signup = () => {
         func();
     }, [navigate]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            await createAccount({
-                username : email,
-                password,
-                retypePassword,
-                role,
-                aadharNumber,
-                organizationName,
-                fullName
-            })
-            navigate("/login");
-        }catch (err){
-            setError(()=>{
-                return {
-                    severity : 'error',
-                    title : "Error: ",
-                    message : err.message
-                }
-            });
-        }  
-    };
+    // Validation functions
+  const isEmailValid = () => {
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isAadharNumberValid = () => {
+    // Regular expression for Aadhaar Number
+    var aadharRegex = /^([0-9]{4}[0-9]{4}[0-9]{4}$)|([0-9]{4}\s[0-9]{4}\s[0-9]{4}$)/;
+    return aadharRegex.test(aadharNumber);
+  }
+
+  const isPasswordValid = () =>{
+    // // Regular expression for Strong password
+    var PwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return PwdRegex.test(password)
+  }
+
+  const PasswordMatch = () =>{
+    return password == retypePassword;
+  }
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      if (!isEmailValid()) {
+        setError({
+          severity: 'error',
+          title: 'Error:',
+          message: 'Invalid email ID',
+        });
+        return;
+      }
+
+      if (!isAadharNumberValid()) {
+        setError({
+          severity: 'error',
+          title: 'Error:',
+          message: 'Invalid Aadhaar number',
+        });
+        return;
+      }
+
+      if (!isPasswordValid()) {
+        setError({
+          severity: 'error',
+          title: 'week Password :',
+          message: 'Set a Strong Password',
+        });
+        return;
+      }
+
+      if (!PasswordMatch()) {
+        setError({
+          severity: 'error',
+          title: 'Error :',
+          message: 'Password mismatch',
+        });
+        return;
+      }
+
+      try{
+          await createAccount({
+              username : email,
+              password,
+              retypePassword,
+              role,
+              aadharNumber,
+              organizationName,
+              fullName
+          })
+          navigate("/login");
+      }catch (err){
+          setError(()=>{
+              return {
+                  severity : 'error',
+                  title : "Error: ",
+                  message : err.message
+              }
+          });
+      }  
+  };
 
   const handleAlertClose = (event, reason) => {
     if (reason === 'clickaway') {
