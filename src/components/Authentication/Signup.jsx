@@ -19,6 +19,7 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '1rem',
+        marginTop:"80px",
         // backgroundColor: 'rgba(255, 255, 255, 0.8)',
         borderRadius: '0.5rem',
         width: '100%',
@@ -101,8 +102,11 @@ const Signup = () => {
 
   const isAadharNumberValid = () => {
     // Regular expression for Aadhaar Number
-    var aadharRegex = /^([0-9]{4}[0-9]{4}[0-9]{4}$)|([0-9]{4}\s[0-9]{4}\s[0-9]{4}$)/;
-    return aadharRegex.test(aadharNumber);
+    if(role == 'user'){
+      var aadharRegex = /^([0-9]{4}[0-9]{4}[0-9]{4}$)/;
+      return aadharRegex.test(aadharNumber);
+    }
+    return true;
   }
 
   const isPasswordValid = () =>{
@@ -185,7 +189,7 @@ const Signup = () => {
 
   return (
     <div>
-      <AppBar position="static" style={styles.appBarStyle}>
+      <AppBar position="fixed" style={styles.appBarStyle}>
         <Toolbar>
         <Typography style={{ flexGrow: 1 }}>
           <Button color="inherit" component={Link} to="/">

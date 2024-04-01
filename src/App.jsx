@@ -9,6 +9,7 @@ import DigiLocker from "./components/User/DigiLocker";
 import VerifyCertificate from "./components/VerifyCertificate";
 import IssueCertificate from "./components/Organization/IssueCertificate";
 import BalancePage from "./components/Organization/BalancePage";
+import ProfilePage from "./components/ProfilePage";
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/verify" element={<VerifyCertificate/>}></Route>
         <Route path="/issue" element={<IssueCertificate/>}></Route>
         <Route path="/balance" element={<BalancePage/>}></Route>
+        <Route path="/ProfilePage" element={<ProfilePage/>}></Route>
       </Routes>
     </BrowserRouter>
   )
