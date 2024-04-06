@@ -150,7 +150,7 @@ const BalancePage = () => {
             </CardContent>
           </Card>
 
-          <Card style={{ marginTop: '1rem' }}>
+          {/*<Card style={{ marginTop: '1rem' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Pay Through UPI
@@ -183,7 +183,7 @@ const BalancePage = () => {
                 Pay
               </Button>
             </CardContent>
-          </Card>
+          </Card>*/}
         </Grid>
 
         {/* Right Total Balance */}

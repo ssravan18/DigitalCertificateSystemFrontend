@@ -2,6 +2,7 @@
 import { Typography, Paper} from '@mui/material';
 import { dontOverflowText } from '../utils/prettyPrint';
 import { Link } from 'react-router-dom';
+import { sendRequest } from '../Services/HttpProvider';
 const styles = {
 	paperStyle : {
 		"padding" : "1rem",
@@ -14,9 +15,18 @@ const styles = {
 	}
 }
 
-const Certificate = ({ title, issuer, issuanceDate, expiryDate }) => {
+const Certificate = ({ title, issuer, issuanceDate, expiryDate, certificateURI }) => {
 	const handleDownload = async () => {
-		alert("Click on Download")
+		const {response} = sendRequest("/downloadcertificate", "POST", {
+			"cid" : certificateURI
+		})
+		const blob = new Blob([response], {type: "application/pdf"});
+		const url = window.URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = `${title}.pdf`;
+		a.click();
+		window.URL.revokeObjectURL(url);
 	}
   return (
     <Paper style={styles.paperStyle}>

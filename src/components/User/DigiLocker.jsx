@@ -141,6 +141,7 @@ function DigiLocker() {
             issuer={certificate.certificateMetaData.Issuer.organizationName}
             issuanceDate={certificate.certificateMetaData.IssueDate}
             expiryDate={certificate.certificateMetaData.ExpiryDate}
+            certificateURI={certificate.certificateMetaData.CertificateURI}
           />)
         })}
     </Stack>}

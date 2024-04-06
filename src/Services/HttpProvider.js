@@ -17,7 +17,7 @@ export const sendRequest = async (path, method, body, headerOptions) => {
     const response = await fetch(url, request);
     const responseBody = await response.json();
     const status = response.status;
-    return {status, responseBody}
+    return {status, responseBody};
 };
 
 export const sendFormDataRequest = async (path, method, formData, headerOptions={}) => {
