@@ -1,7 +1,7 @@
 import { AppBar, Button, Toolbar, Typography, Avatar, Menu, MenuItem, Container, Grid, Card} from "@mui/material";
 import { useState } from "react";
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link, useNavigate } from "react-router-dom";
+import CustomAppBar from "../CustomAppBar";
 
 
 const styles = {
@@ -18,58 +18,17 @@ const styles = {
     }
 }
 function OrganizationDashboard() {
-    const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
-    const handleLogout = () => {
-        handleClose();
-        sessionStorage.removeItem("jwToken");
-        sessionStorage.removeItem("role");
-        navigate("/login");
-    }
 
-    const handleBalance = () => {
-      handleClose();
-      navigate("/balance");
-    }
   return (
     <div style={{width : "100vw", height : "100vh", backgroundColor : "#eeeeee"}}>
 
-    <AppBar>
-    <Toolbar>
-        <Typography variant="h5">Organization Dashboard</Typography>
-        <NotificationsIcon style={{marginLeft: "auto"}}></NotificationsIcon>
-        <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <Avatar style={{margin: "0.5rem 1rem 0.5rem 1.5rem"}}/>
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleBalance}>Balance</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-      </Menu>
-    </Toolbar>
-    </AppBar>
+    <CustomAppBar title={"Organization Dashboard"}/>
     <Container style={styles.containerStyle}>
         <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} style={styles.gridStyle}>

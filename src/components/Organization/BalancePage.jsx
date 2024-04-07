@@ -5,6 +5,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router-dom';
 import { verifyAndRedirect, logoutAccount } from '../../utils/authentication';
 import { fetchBalance, sendEther } from '../../utils/blockchainHelper';
+import CustomAppBar from '../CustomAppBar';
 
 const BalancePage = () => {
   const navigate = useNavigate();
@@ -90,37 +91,11 @@ const BalancePage = () => {
           </Alert>
           </Snackbar>
   )}
-    <AppBar>
-		<Toolbar>
-			{/* <Typography variant="h5">Issue Certificate</Typography> */}
-			<NotificationsIcon style={{marginLeft: "auto"}}></NotificationsIcon>
-			<Button
-			id="basic-button"
-			aria-controls={open ? 'basic-menu' : undefined}
-			aria-haspopup="true"
-			aria-expanded={open ? 'true' : undefined}
-			onClick={handleClick}
-			>
-				<Avatar style={{margin: "0.5rem 1rem 0.5rem 1.5rem"}}/>
-			</Button>
-			<Menu
-			id="basic-menu"
-			anchorEl={anchorEl}
-			open={open}
-			onClose={handleClose}
-			MenuListProps={{'aria-labelledby': 'basic-button',}}>
-				<MenuItem onClick={handleClose}>Profile</MenuItem>
-				<MenuItem onClick={handleClose}>My account</MenuItem>
-				<MenuItem onClick={handleLogout}>Logout</MenuItem>
-			</Menu>
-		</Toolbar>
-	</AppBar>
+    <CustomAppBar title={"BALANCE"}/>
   <Container>
-      <Typography variant="h4" align="center" gutterBottom>
-        Balance Page
-      </Typography>
+      
 
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{marginTop:"10px"}}>
         {/* Left Form */}
         <Grid item xs={12} md={6}>
           <Card>
